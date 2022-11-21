@@ -40,6 +40,6 @@ public class SetTest {
     @ParameterizedTest
     @CsvSource(value = {"1:true", "2:true", "5:false", "6:false"}, delimiter = ':')
     void contain2(int input, boolean expected){
-        
+        assertThat(numbers.contains(input) == expected);
     }
 }
