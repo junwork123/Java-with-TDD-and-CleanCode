@@ -3,6 +3,8 @@ package org.calculator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +15,11 @@ class CalculatorTest {
     @BeforeEach
     public void setUp()  {
         cal = new Calculator();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        cal = null;
     }
 
     @Test
@@ -35,8 +42,10 @@ class CalculatorTest {
         assertEquals(2, cal.divide(8, 4));
     }
 
-    @AfterEach
-    public void tearDown() {
-        cal = null;
+    @ParameterizedTest(name = "문자열 입력 테스트")
+    @ValueSource(strings = {"1 + 2", "1 - 2", "1 * 2", "1 / 2"})
+    public void 문자열_입력(String input){
+        cal.inputString();
     }
+
 }
