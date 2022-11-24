@@ -6,7 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.io.*;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 class CalculatorTest {
 
@@ -15,6 +19,8 @@ class CalculatorTest {
     @BeforeEach
     public void setUp()  {
         cal = new Calculator();
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
     }
 
     @AfterEach
@@ -45,7 +51,13 @@ class CalculatorTest {
     @ParameterizedTest(name = "문자열 입력 테스트")
     @ValueSource(strings = {"1 + 2", "1 - 2", "1 * 2", "1 / 2"})
     public void 문자열_입력(String input){
-        cal.inputString();
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        Scanner sc = new Scanner(System.in);
+        String[] actual = cal.inputString(sc);
+
+        assertThat(actual[0]).isEqualTo("1");
+        assertThat(actual[2]).isEqualTo("2");
     }
 
 }
