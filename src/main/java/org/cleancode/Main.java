@@ -1,4 +1,4 @@
-package org.calculator;
+package org.cleancode;
 
 public class Main {
     public static void main(String[] args) {

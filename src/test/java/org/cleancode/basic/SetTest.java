@@ -1,4 +1,4 @@
-package org.calculator;
+package org.cleancode.basic;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
