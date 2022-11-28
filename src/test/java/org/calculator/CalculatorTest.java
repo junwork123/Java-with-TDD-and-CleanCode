@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.*;
@@ -95,9 +96,11 @@ class CalculatorTest {
     }
 
     @ParameterizedTest(name = "문자열 계산 테스트")
-    @ValueSource(strings = {"1 + 2", "1 - 2", "1 * 2", "1 / 2"})
-    public void 문자열_계산(String input){
-        double result = calculator.calculate(input);
+    @CsvSource(value = {"1 + 2:3", "1 - 2:-1", "1 * 2:2", "1 / 2:0"}, delimiter = ':')
+    public void 문자열_계산(String input, int expected){
+        int result = calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
     }
 
 }

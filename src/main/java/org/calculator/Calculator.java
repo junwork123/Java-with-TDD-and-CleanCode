@@ -49,23 +49,40 @@ public class Calculator {
                 .filter(this::isOperator)
                 .collect(Collectors.toList());
 
-        Map<String, List<String>> result = new HashMap<>();
-        result.put("numbers", numbers);
-        result.put("ops", ops);
-
         if (numbers.isEmpty() || ops.isEmpty()){
             throw new IllegalArgumentException("잘못된 계산식입니다.");
         }
 
+        Map<String, List<String>> result = new HashMap<>();
+        result.put("numbers", numbers);
+        result.put("ops", ops);
+
         return result;
     }
 
-    private double calculate(List<String> numbers, List<String> ops){
-        return 0;
+    public int calculate(int x, int y, String op){
+        int result = 0;
+        switch (op){
+            case "+": result = add(x,y); break;
+            case "-": result = subtract(x,y); break;
+            case "*": result = multiply(x,y); break;
+            case "/": result = divide(x,y); break;
+            default: throw new IllegalArgumentException("잘못된 연산자입니다.");
+        }
+        return result;
     }
-
-    public double calculate(String input){
+    public int calculate(String input){
         Map<String, List<String>> map = parse(input);
-        return calculate(map.get("numbers"), map.get("ops"));
+        List<String> numbers = map.get("numbers");
+        List<String> ops = map.get("ops");
+
+        int result = 0, x = 0, y = 0;
+        for(String op : ops){
+            x = Integer.parseInt(numbers.remove(0));
+            y = Integer.parseInt(numbers.remove(0));
+            result += calculate(x,y,op);
+        }
+
+        return result;
     }
 }
