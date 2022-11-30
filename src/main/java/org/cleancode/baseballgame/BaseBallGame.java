@@ -29,10 +29,12 @@ public class BaseBallGame {
     private final ResultView resultView = new ResultView();
 
     public BaseBallGame(){
-        menuView.setMenu(MenuView.Menu.WELCOME);
-        menuView.display();
+        menuView.display(Menu.WELCOME);
+        inputView.display(Menu.START_GAME);
+        resultView.display(Menu.INNING_RESULT);
+    }
 
-        inputView.display();
-        resultView.display();
+    public void startGame(){
+
     }
 }
