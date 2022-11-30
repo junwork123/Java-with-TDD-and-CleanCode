@@ -32,18 +32,12 @@ public class Calculator {
     }
     public boolean isNumber(String item){
         Matcher matcher = NUMBER_PATTERN.matcher(item);
-        if(matcher.matches()){
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
     public boolean isOperator(String item){
         Matcher matcher = OPERATOR_PATTERN.matcher(item);
-        if(matcher.matches()){
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
     Map<String, List<String>> parse(String input){
@@ -67,7 +61,7 @@ public class Calculator {
     }
 
     public int calculate(int x, int y, String op){
-        int result = 0;
+        int result;
         switch (op){
             case "+": result = add(x,y); break;
             case "-": result = subtract(x,y); break;
