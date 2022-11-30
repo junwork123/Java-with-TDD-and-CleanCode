@@ -7,10 +7,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,13 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
     Calculator calculator;
-    Scanner sc;
-    String getTestInput(String input){
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
 
     @BeforeEach
     public void setUp()  {
@@ -90,9 +84,8 @@ class CalculatorTest {
     @ParameterizedTest(name = "문자열 입력 테스트 실패")
     @ValueSource(strings = {"123", "1 2", "1  2", "1 q 2", "1 2 3"})
     public void 문자열_입력_실패(String input){
-        assertThatThrownBy( () -> {
-            Map<String, List<String>> resultMap = calculator.parse(input);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy( () -> calculator.parse(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest(name = "문자열 계산 테스트")
