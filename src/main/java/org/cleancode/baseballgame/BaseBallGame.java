@@ -24,4 +24,15 @@ package org.cleancode.baseballgame;
  * 게임을 종료한 후 게임을 다시 시작하거나 완전히 종료할 수 있다.
  */
 public class BaseBallGame {
+    private final InputView inputView = new InputView();
+    private final MenuView menuView = new MenuView();
+    private final ResultView resultView = new ResultView();
+
+    public BaseBallGame(){
+        menuView.setMenu(MenuView.Menu.WELCOME);
+        menuView.display();
+
+        inputView.display();
+        resultView.display();
+    }
 }
