@@ -1,24 +1,38 @@
 package org.cleancode.baseballgame;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Scanner;
+
 public class InputView implements View {
-    private Menu menu;
-    public Menu getMenu() {
-        return menu;
+
+    private Scanner sc;
+    String getTextInput(String input){
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
+
     @Override
-    public void display() {
-        System.out.println(menu.msg);
+    public void display(Menu menu) {
+        Arrays.stream(InnerMenu.values())
+                .filter(innerMenu -> innerMenu.menu.equals(menu))
+                .findFirst()
+                .ifPresent(innerMenu -> System.out.println(innerMenu.msg));
     }
-    public enum Menu{
-        START_GAME("숫자 야구 게임을 시작하시겠습니까?"),
-        END_GAME("게임을 종료하시겠습니까?"),
-        START_INNING("3자리 숫자를 입력해주세요");
+
+    enum InnerMenu{
+        START_GAME(Menu.START_GAME, "숫자 야구 게임을 시작하시겠습니까?"),
+        END_GAME(Menu.END_GAME, "게임을 종료하시겠습니까?"),
+        START_INNING(Menu.START_INNING, "3자리 숫자를 입력해주세요");
 
         private final String msg;
-        Menu(String msg){
+        private final Menu menu;
+        InnerMenu(Menu menu, String msg){
+            this.menu = menu;
             this.msg = msg;
         }
     }

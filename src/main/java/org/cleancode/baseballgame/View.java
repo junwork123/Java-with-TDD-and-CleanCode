@@ -1,5 +1,5 @@
 package org.cleancode.baseballgame;
 
 public interface View {
-    public void display();
+    void display(Menu menu);
 }

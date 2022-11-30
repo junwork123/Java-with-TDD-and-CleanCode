@@ -1,24 +1,24 @@
 package org.cleancode.baseballgame;
 
+import java.util.Arrays;
+
 public class ResultView implements View {
-    private Menu menu;
-    public Menu getMenu() {
-        return menu;
-    }
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
+
     @Override
-    public void display() {
-        System.out.println(menu.msg);
+    public void display(Menu menu) {
+        Arrays.stream(InnerMenu.values())
+                .filter(innerMenu -> innerMenu.menu.equals(menu))
+                .findFirst()
+                .ifPresent(innerMenu -> System.out.println(innerMenu.msg));
     }
-    public enum Menu{
-        END_INNING("숫자 야구 게임을 시작하시겠습니까?"),
-        END_GAME("게임을 종료하시겠습니까?"),
-        START_INNING("3자리 숫자를 입력해주세요");
+    enum InnerMenu{
+        INNING_RESULT(Menu.INNING_RESULT, "이닝 점수를 발표합니다"),
+        GAME_RESULT(Menu.GAME_RESULT,"게임 결과를 발표합니다.");
 
         private final String msg;
-        Menu(String msg){
+        private final Menu menu;
+        InnerMenu(Menu menu, String msg){
+            this.menu = menu;
             this.msg = msg;
         }
     }
