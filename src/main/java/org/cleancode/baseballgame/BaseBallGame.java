@@ -1,5 +1,17 @@
 package org.cleancode.baseballgame;
 
+import org.cleancode.baseballgame.object.Judge;
+import org.cleancode.baseballgame.object.Player;
+import org.cleancode.baseballgame.view.InputView;
+import org.cleancode.baseballgame.view.Menu;
+import org.cleancode.baseballgame.view.MenuView;
+import org.cleancode.baseballgame.view.ResultView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  * 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
  *
@@ -27,14 +39,22 @@ public class BaseBallGame {
     private final InputView inputView = new InputView();
     private final MenuView menuView = new MenuView();
     private final ResultView resultView = new ResultView();
+    private final Scanner sc = new Scanner(System.in);
+    public String getStringInput(){
+        return sc.nextLine();
+    }
+    private final Judge judge = new Judge();
+
+    private final List<Player> players = new ArrayList<>();
 
     public BaseBallGame(){
-        menuView.display(Menu.WELCOME);
-        inputView.display(Menu.START_GAME);
-        resultView.display(Menu.INNING_RESULT);
+        String answer = getAnswer();
+        String input = getStringInput();
+        judge.judge(input, answer);
     }
 
-    public void startGame(){
-
+    public String getAnswer(){
+        return String.valueOf(new Random().nextInt(999));
     }
+
 }
