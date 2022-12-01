@@ -1,14 +1,13 @@
 package org.cleancode.baseballgame;
 
 import org.cleancode.baseballgame.object.Judge;
+import org.cleancode.baseballgame.object.MatchResult;
 import org.cleancode.baseballgame.object.Player;
 import org.cleancode.baseballgame.view.InputView;
 import org.cleancode.baseballgame.view.Menu;
 import org.cleancode.baseballgame.view.MenuView;
 import org.cleancode.baseballgame.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -45,16 +44,34 @@ public class BaseBallGame {
     }
     private final Judge judge = new Judge();
 
-    private final List<Player> players = new ArrayList<>();
+    private final Player player = new Player();
 
     public BaseBallGame(){
-        String answer = getAnswer();
-        String input = getStringInput();
-        judge.judge(input, answer);
+        String answer = getRandomAnswer();
+        boolean keepGoing = true;
+        while (keepGoing){
+            keepGoing = playInning(answer);
+        }
+
+    }
+    public String getRandomAnswer(){
+        // 111~999까지 정수 반환
+        // 0이 나오지 않도록 해야함
+        int i__ = (1 + new Random().nextInt(8)) * 100;
+        int _i_ = (1 + new Random().nextInt(8)) * 10;
+        int __i = 1 + new Random().nextInt(8);
+        return String.valueOf(i__ + _i_ + __i);
     }
 
-    public String getAnswer(){
-        return String.valueOf(new Random().nextInt(999));
+    public boolean playInning(String answer){
+        inputView.display(Menu.START_INNING);
+        MatchResult result = judge.judge(getStringInput(), answer);
+        player.getRecords().add(result);
+        if(result.getStrike() == 3) {
+            resultView.display(Menu.END_GAME);
+            return false;
+        }
+        resultView.display(Menu.END_INNING);
+        return true;
     }
-
 }
