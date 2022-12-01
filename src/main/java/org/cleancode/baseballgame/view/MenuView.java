@@ -1,4 +1,4 @@
-package org.cleancode.baseballgame;
+package org.cleancode.baseballgame.view;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package org.cleancode.baseballgame;
+package org.cleancode.baseballgame.view;
 
 public enum Menu {
     WELCOME,
