@@ -1,8 +1,18 @@
 package org.cleancode.baseballgame.view;
 
+import org.cleancode.baseballgame.object.MatchResult;
+
 import java.util.Arrays;
 
 public class ResultView implements View {
+    public void display(MatchResult result){
+        if(result.isWin()){
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            return;
+        }
+        System.out.printf("%d 볼", result.getBalls());
+        System.out.printf("%d 스트라이크", result.getStrikes());
+    }
 
     @Override
     public void display(Menu menu) {

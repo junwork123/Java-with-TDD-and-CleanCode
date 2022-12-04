@@ -42,7 +42,6 @@ public class BaseBallGame {
     public String getStringInput(){
         return sc.nextLine();
     }
-    private final Judge judge = new Judge();
 
     private final Player player = new Player();
 
@@ -65,9 +64,9 @@ public class BaseBallGame {
 
     public boolean playInning(String answer){
         inputView.display(Menu.START_INNING);
-        MatchResult result = judge.judge(getStringInput(), answer);
+        MatchResult result = Judge.judge(getStringInput(), answer);
         player.getRecords().add(result);
-        if(result.getStrike() == 3) {
+        if(result.getStrikes() == 3) {
             resultView.display(Menu.END_GAME);
             return false;
         }

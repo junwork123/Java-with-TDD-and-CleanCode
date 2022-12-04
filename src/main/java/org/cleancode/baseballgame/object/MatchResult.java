@@ -1,18 +1,21 @@
 package org.cleancode.baseballgame.object;
 
 public class MatchResult {
-    private final int ball;
-    private final int strike;
+    private final int balls;
+    private final int strikes;
 
-    public MatchResult(int ball, int strike){
-        this.ball = ball;
-        this.strike = strike;
+    public MatchResult(int balls, int strikes){
+        this.balls = balls;
+        this.strikes = strikes;
     }
-    public int getBall() {
-        return ball;
+    public int getBalls() {
+        return balls;
     }
-    public int getStrike() {
-        return strike;
+    public int getStrikes() {
+        return strikes;
     }
 
+    public boolean isWin(){
+        return strikes == 3 && balls == 0;
+    }
 }
