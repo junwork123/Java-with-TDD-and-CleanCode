@@ -15,7 +15,7 @@ public class MatchResult {
         return strikes;
     }
 
-    public boolean isWin(){
+    public boolean isGameWin(){
         return strikes == 3 && balls == 0;
     }
 }

@@ -4,7 +4,7 @@ import org.cleancode.baseballgame.object.MatchResult;
 
 public class View{
     public void display(MatchResult result){
-        if(result.isWin()){
+        if(result.isGameWin()){
             display(Menu.CORRECT_ANSWER);
             return;
         }

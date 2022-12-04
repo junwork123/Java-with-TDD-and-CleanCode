@@ -1,6 +1,6 @@
 package org.cleancode.baseballgame;
 
-import org.cleancode.baseballgame.object.Ball;
+import org.cleancode.baseballgame.object.Balls;
 import org.cleancode.baseballgame.object.Judge;
 import org.cleancode.baseballgame.object.MatchResult;
 import org.cleancode.baseballgame.view.Menu;
@@ -42,10 +42,10 @@ public class BaseBallGame {
     public BaseBallGame(){
         view.display(Menu.WELCOME);
         view.display(Menu.START_GAME);
-        String answer = new Ball().getAnswer();
-        boolean isWin = false;
-        while (!isWin){
-            isWin = playInning(answer);
+        String answer = new Balls().getAnswer();
+        boolean isGameWin = false;
+        while (!isGameWin){
+            isGameWin = playInning(answer);
         }
         view.display(Menu.END_GAME);
     }
@@ -54,6 +54,6 @@ public class BaseBallGame {
         String input = typeInput();
         MatchResult result = Judge.judge(input, answer);
         view.display(result);
-        return result.isWin();
+        return result.isGameWin();
     }
 }
