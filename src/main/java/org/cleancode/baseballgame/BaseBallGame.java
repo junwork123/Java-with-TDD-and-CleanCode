@@ -52,8 +52,9 @@ public class BaseBallGame {
 
     public boolean playInning(String answer){
         String input = typeInput();
-        MatchResult result = Judge.judge(input, answer);
-        view.display(result);
-        return result.isGameWin();
+        Optional<MatchResult> resultOptional = Judge.judge(input, answer);
+        if(resultOptional.isEmpty()){ return false; }
+        view.display(resultOptional.get());
+        return resultOptional.get().isGameWin();
     }
 }
