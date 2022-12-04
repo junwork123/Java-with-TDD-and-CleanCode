@@ -56,10 +56,12 @@ public class BaseBallGame {
     public String getRandomAnswer(){
         // 111~999까지 정수 반환
         // 0이 나오지 않도록 해야함
-        int i__ = (1 + new Random().nextInt(8)) * 100;
-        int _i_ = (1 + new Random().nextInt(8)) * 10;
-        int __i = 1 + new Random().nextInt(8);
-        return String.valueOf(i__ + _i_ + __i);
+        // 서로 다른 수가 나와야 함
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        int i__ = numbers.remove(new Random().nextInt(numbers.size()));
+        int _i_ = numbers.remove(new Random().nextInt(numbers.size()));
+        int __i = numbers.remove(new Random().nextInt(numbers.size()));
+        return String.valueOf((i__ * 100) + (_i_ * 10) + __i);
     }
 
     public boolean playInning(String answer){
