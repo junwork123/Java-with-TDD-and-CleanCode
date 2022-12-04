@@ -1,5 +1,6 @@
 package org.cleancode.baseballgame;
 
+import org.cleancode.baseballgame.object.Ball;
 import org.cleancode.baseballgame.object.Judge;
 import org.cleancode.baseballgame.object.MatchResult;
 import org.cleancode.baseballgame.view.Menu;
@@ -41,22 +42,12 @@ public class BaseBallGame {
     public BaseBallGame(){
         view.display(Menu.WELCOME);
         view.display(Menu.START_GAME);
-        String answer = getRandomAnswer();
+        String answer = new Ball().getAnswer();
         boolean isWin = false;
         while (!isWin){
             isWin = playInning(answer);
         }
         view.display(Menu.END_GAME);
-    }
-    public String getRandomAnswer(){
-        // 111~999까지 정수 반환
-        // 0이 나오지 않도록 해야함
-        // 서로 다른 수가 나와야 함
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
-        int i__ = numbers.remove(new Random().nextInt(numbers.size()));
-        int _i_ = numbers.remove(new Random().nextInt(numbers.size()));
-        int __i = numbers.remove(new Random().nextInt(numbers.size()));
-        return String.valueOf((i__ * 100) + (_i_ * 10) + __i);
     }
 
     public boolean playInning(String answer){
