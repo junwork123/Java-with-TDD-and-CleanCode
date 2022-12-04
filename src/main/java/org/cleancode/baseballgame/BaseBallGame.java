@@ -2,14 +2,10 @@ package org.cleancode.baseballgame;
 
 import org.cleancode.baseballgame.object.Judge;
 import org.cleancode.baseballgame.object.MatchResult;
-import org.cleancode.baseballgame.object.Player;
-import org.cleancode.baseballgame.view.InputView;
 import org.cleancode.baseballgame.view.Menu;
-import org.cleancode.baseballgame.view.MenuView;
-import org.cleancode.baseballgame.view.ResultView;
+import org.cleancode.baseballgame.view.View;
 
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
@@ -35,23 +31,22 @@ import java.util.Scanner;
  * 게임을 종료한 후 게임을 다시 시작하거나 완전히 종료할 수 있다.
  */
 public class BaseBallGame {
-    private final InputView inputView = new InputView();
-    private final MenuView menuView = new MenuView();
-    private final ResultView resultView = new ResultView();
+    private final View view = new View();
     private final Scanner sc = new Scanner(System.in);
-    public String getStringInput(){
+    public String typeInput(){
+        view.display(Menu.TYPE_INPUT);
         return sc.nextLine();
     }
 
-    private final Player player = new Player();
-
     public BaseBallGame(){
+        view.display(Menu.WELCOME);
+        view.display(Menu.START_GAME);
         String answer = getRandomAnswer();
-        boolean keepGoing = true;
-        while (keepGoing){
-            keepGoing = playInning(answer);
+        boolean isWin = false;
+        while (!isWin){
+            isWin = playInning(answer);
         }
-
+        view.display(Menu.END_GAME);
     }
     public String getRandomAnswer(){
         // 111~999까지 정수 반환
@@ -65,14 +60,9 @@ public class BaseBallGame {
     }
 
     public boolean playInning(String answer){
-        inputView.display(Menu.START_INNING);
-        MatchResult result = Judge.judge(getStringInput(), answer);
-        player.getRecords().add(result);
-        if(result.getStrikes() == 3) {
-            resultView.display(Menu.END_GAME);
-            return false;
-        }
-        resultView.display(Menu.END_INNING);
-        return true;
+        String input = typeInput();
+        MatchResult result = Judge.judge(input, answer);
+        view.display(result);
+        return result.isWin();
     }
 }
