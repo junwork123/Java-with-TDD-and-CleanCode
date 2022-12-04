@@ -1,23 +1,25 @@
 package org.cleancode.baseballgame.object;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public class Judge {
-    public MatchResult judge(String input, String expected){
-        int ball = 0, strike = 0;
-        for (String item: input.split("")) {
-            ball += isBall(item, expected);
-            strike += isStrike(item, expected);
-        }
-        return new MatchResult(ball, strike);
+    private Judge(){}
+
+    public static MatchResult judge(String input, String expected){
+        return new MatchResult(isBall(input, expected), isStrike(input, expected));
     }
 
-    private int isStrike(String item, String expected) {
-        return 0;
+    public static int isStrike(String input, String expected) {
+        return (int) Arrays.stream(input.split(""))
+                .filter(expected::contains)
+                .filter(charAt -> input.indexOf(charAt) == expected.indexOf(charAt))
+                .count();
     }
 
-    private int isBall(String item, String expected) {
-        return 0;
+    public static int isBall(String input, String expected) {
+        return (int) Arrays.stream(input.split(""))
+                .filter(expected::contains)
+                .filter(charAt -> input.indexOf(charAt) != expected.indexOf(charAt))
+                .count();
     }
 }
