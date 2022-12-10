@@ -19,12 +19,12 @@ public class Position implements Comparable {
         return distance;
     }
 
-    public Position move(int distance){
+    public Position move(int toMove){
         // 조작할 일이 많이 없거나, 안정성(불변 상태) 우선인 경우
-        // return new Position(position + distance);
+        // return new Position(position + toMove);
 
         // 성능(인스턴스 Garbage Collection 최소) 우선인 경우
-        this.distance = distance + 1;
+        this.distance = this.distance + toMove;
         return this;
     }
 
