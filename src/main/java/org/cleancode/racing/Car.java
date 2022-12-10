@@ -1,27 +1,25 @@
 package org.cleancode.racing;
 
 public class Car {
-    public static final int OIL_THRESHOLD = 4;
-    public static final int DEFAULT_DISTANCE = 1;
-    private final String name;
-    private int position;
+    private final Name name;
+    private Position position;
 
     public Car(String name) {
-        this.name = name;
-        this.position = DEFAULT_DISTANCE;
+        this.name = new Name(name);
+        this.position = new Position();
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public int getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public int move(int oil){
-        if(oil >= OIL_THRESHOLD){
-            this.position++;
+    public Position move(MovingStrategy strategy){
+        if(strategy.movable()){
+            position = position.move(1);
         }
         return position;
     }

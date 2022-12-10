@@ -2,22 +2,21 @@ package org.cleancode.racing;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.OptionalInt;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class RacingGame {
-    private final NumberGenerator generator = new NumberGenerator();
-    private final GameView view = new GameView();
 
     public RacingGame(){
+        GameView view = new GameView();
         String carNames = view.inputCarNames();
         int chances = view.inputTryChances();
 
         List<String> carNameList = parseCarName(carNames);
         List<Car> players = createPlayers(carNameList);
         while (chances > 0){
-            players.forEach(car -> car.move(generator.getRandomNumber()));
+            players.forEach(car -> car.move(new RandomMovingStrategy()));
             chances--;
             view.displayResult(players);
         }
@@ -38,15 +37,15 @@ public class RacingGame {
     }
 
     public List<Car> whoIsWinner(List<Car> carList){
-        OptionalInt maxOptional = carList.stream()
-                .flatMapToInt(car -> IntStream.of(car.getPosition()))
-                .max();
+        Optional<Position> maxOptional = carList.stream()
+                .flatMap(car -> Stream.of(car.getPosition()))
+                .max(Position::compareTo);
         if(maxOptional.isEmpty()) {
             return null;
         }
-        int max = maxOptional.getAsInt();
+        Position max = maxOptional.get();
         return carList.stream()
-                .filter(car -> car.getPosition() == max)
+                .filter(car -> car.getPosition().equals(max))
                 .collect(Collectors.toList());
     }
 }

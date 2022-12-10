@@ -21,12 +21,13 @@ public class GameView {
     public void displayResult(List<Car> carList) {
         System.out.println("실행 결과");
         carList.forEach(car ->
-                System.out.println(car.getName() + " : " + "-".repeat(car.getPosition())));
+                System.out.println(car.getName() + " : " + "-".repeat(car.getPosition().getDistance())));
     }
 
     public void displayWinner(List<Car> winnerList) {
         Optional<String> stringOptional = winnerList.stream()
                 .map(Car::getName)
+                .map(Name::toString)
                 .reduce((s, s2) -> s + ", " + s2);
         if(stringOptional.isEmpty()){
             return;

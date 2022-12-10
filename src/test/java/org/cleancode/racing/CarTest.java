@@ -8,9 +8,15 @@ class CarTest {
     Car car = new Car("test");
     @Test
     void move() {
-        assertThat(car.move(0)).isEqualTo(Car.DEFAULT_DISTANCE);
-        assertThat(car.move(Car.OIL_THRESHOLD-1)).isEqualTo(Car.DEFAULT_DISTANCE);
-        assertThat(car.move(Car.OIL_THRESHOLD)).isEqualTo(Car.DEFAULT_DISTANCE+1);
-        assertThat(car.move(Car.OIL_THRESHOLD+1)).isEqualTo(Car.DEFAULT_DISTANCE+2);
+        MovingStrategy strategy = new MovingStrategy() {
+            @Override
+            public boolean movable() {
+                // return getRandomNo() >= OIL_THRESHOLD;
+                // 랜덤값을 고정값으로 대체할 수 있다.
+                return false;
+            }
+        }; // MovingStrategy strategy = () -> false 로 대체 가능
+        assertThat(car.move(strategy)).isEqualTo(new Position(Position.DEFAULT_DISTANCE));
+        assertThat(car.move(() -> true)).isEqualTo(new Position(Position.DEFAULT_DISTANCE + 1));
     }
 }
