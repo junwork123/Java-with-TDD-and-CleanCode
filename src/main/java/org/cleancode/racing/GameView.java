@@ -20,8 +20,7 @@ public class GameView {
 
     public void displayResult(List<Car> carList) {
         System.out.println("실행 결과");
-        carList.forEach(car ->
-                System.out.println(car.getName() + " : " + "-".repeat(car.getPosition().getDistance())));
+        carList.forEach(Car::displayResult);
     }
 
     public void displayWinner(List<Car> winnerList) {
@@ -32,6 +31,6 @@ public class GameView {
         if(stringOptional.isEmpty()){
             return;
         }
-        System.out.print(stringOptional.get() + "가 최종 우승했습니다.");
+        System.out.println(stringOptional.get() + "가 최종 우승했습니다.");
     }
 }
