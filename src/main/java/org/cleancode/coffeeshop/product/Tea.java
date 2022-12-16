@@ -28,8 +28,7 @@ public class Tea extends CaffeineBeverage {
     }
 
     private void boilWater() {
-        System.out.println("Boiling water, Size : " + getSize());
-        System.out.println();
+        System.out.println("Boiling water");
     }
 
     @Override

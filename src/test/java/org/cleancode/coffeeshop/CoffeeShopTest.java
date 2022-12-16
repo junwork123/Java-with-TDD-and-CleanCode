@@ -1,47 +1,36 @@
 package org.cleancode.coffeeshop;
 
-import org.cleancode.coffeeshop.product.Beverage;
-import org.cleancode.coffeeshop.product.CaffeineBeverage;
-import org.cleancode.coffeeshop.product.Coffee;
-import org.cleancode.coffeeshop.product.Size;
-import org.cleancode.coffeeshop.shop.CaffeineBeverageFactory;
+import org.cleancode.coffeeshop.product.*;
 import org.cleancode.coffeeshop.shop.CoffeeShop;
-import org.cleancode.coffeeshop.shop.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CoffeeShopTest {
     CoffeeShop coffeeShop;
-    Order order;
 
     @BeforeEach
     public void setUp() {
         this.coffeeShop = new CoffeeShop();
-        this.order = new Order.OrderBuilder()
-                .menuName("아메리카노")
-                .size(1)
-                .build();
-    }
-
-    @Test
-    public void create(){
-        CaffeineBeverage beverage = CaffeineBeverageFactory.create(order);
-
-        assertThat(beverage).isInstanceOf(Coffee.class);
-
-        Coffee coffee = (Coffee) beverage;
-        assertThat(coffee).isEqualTo(new Coffee(Beverage.AMERICANO, Size.TALL));
     }
 
     @Test
     public void order(){
-        CaffeineBeverage caffeineBeverage = coffeeShop.order("아메리카노", 1);
+        // 커피
+        CaffeineBeverage beverage = coffeeShop.order("아메리카노", 1);
+        assertThat(beverage).isInstanceOf(Coffee.class);
 
-        assertThat(caffeineBeverage).isInstanceOf(Coffee.class);
-
-        Coffee coffee = (Coffee) caffeineBeverage;
+        Coffee coffee = (Coffee) beverage;
         assertThat(coffee).isEqualTo(new Coffee(Beverage.AMERICANO, Size.TALL));
+
+        // 홍차
+        CaffeineBeverage beverage2 = coffeeShop.order("홍차", 2);
+        assertThat(beverage2).isInstanceOf(Tea.class);
+
+        Tea tea = (Tea) beverage2;
+        assertThat(tea).isEqualTo(new Tea(Beverage.BLACK_TEA, Size.GRANDE));
     }
 
     @Test void orderFail(){

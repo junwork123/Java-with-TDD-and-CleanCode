@@ -3,7 +3,7 @@ package org.cleancode.coffeeshop.shop;
 import org.cleancode.coffeeshop.product.CaffeineBeverage;
 
 public class CoffeeShop {
-    public Menu menu;
+    private final Menu menu;
     public CoffeeShop() {
         this.menu = Menu.createDefaultMenuList();
     }
@@ -18,9 +18,15 @@ public class CoffeeShop {
                 .menuName(menuName)
                 .size(size)
                 .build();
+        pay(order);
         return CaffeineBeverageFactory
                 .create(order)
                 .prepareRecipe();
+    }
+
+    private void pay(Order order) {
+        System.out.println(order.toString());
+        System.out.println(menu.getPrice(order) + "원 결제 완료");
     }
 
     private void validate(String menuName, int size) {

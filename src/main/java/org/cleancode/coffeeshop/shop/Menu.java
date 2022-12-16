@@ -14,6 +14,9 @@ public class Menu {
         this.beverageMap = beverageMap;
         this.sizeMap = sizeMap;
     }
+    public int getPrice(Order order) {
+        return beverageMap.get(order.getBeverage()) + sizeMap.get(order.getSize());
+    }
 
     public boolean containsMenu(String menuName){
         return beverageMap.keySet().stream()

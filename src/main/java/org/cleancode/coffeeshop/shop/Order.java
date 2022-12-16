@@ -19,7 +19,15 @@ public class Order {
         return this.size;
     }
 
-    public static class OrderBuilder {
+    @Override
+    public String toString() {
+        return "Order{" +
+                "beverage=" + beverage +
+                ", size=" + size +
+                '}';
+    }
+
+    protected static class OrderBuilder {
         private String menuName;
         private int size;
         public OrderBuilder menuName(String menuName) {
