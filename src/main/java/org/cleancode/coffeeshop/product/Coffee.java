@@ -5,27 +5,25 @@ public class Coffee extends CaffeineBeverage {
         super(beverage, size);
     }
 
-    public CaffeineBeverage prepareRecipe() {
+    public void prepareRecipe() {
         boilWater();
-        brewCoffeeGrinds();
+        brew();
         pourInCup();
-        addSugarAndMilk();
+        addCondiments();
         complete();
-        return this;
     }
-
-    private void complete() {
+    @Override
+    protected void complete() {
         System.out.println("Complete");
     }
-
-    private void addSugarAndMilk() {
-        System.out.println("Adding Sugar and Milk");
-    }
-
-    private void brewCoffeeGrinds() {
+    @Override
+    protected void brew() {
         System.out.println("Dripping Coffee through filter");
     }
-
+    @Override
+    protected void addCondiments() {
+        System.out.println("Adding Sugar and Milk");
+    }
     private void boilWater() {
         System.out.println("Boiling water");
     }

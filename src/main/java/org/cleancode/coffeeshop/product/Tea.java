@@ -6,28 +6,30 @@ public class Tea extends CaffeineBeverage {
     }
 
     @Override
-    public CaffeineBeverage prepareRecipe() {
-        boilWater();
+    public void prepareRecipe() {
+        brew();
         steepTeaBag();
         pourInCup();
-        addLemon();
+        addCondiments();
         complete();
-        return this;
-    }
-
-    private void complete() {
-        System.out.println("Complete");
-    }
-
-    private void addLemon() {
-        System.out.println("Adding Lemon");
     }
 
     private void steepTeaBag() {
         System.out.println("Steeping the tea");
     }
 
-    private void boilWater() {
+    @Override
+    protected void complete() {
+        System.out.println("Complete");
+    }
+
+    @Override
+    protected void addCondiments() {
+        System.out.println("Adding Lemon");
+    }
+
+    @Override
+    protected void brew() {
         System.out.println("Boiling water");
     }
 

@@ -20,8 +20,7 @@ public class CoffeeShop {
                 .build();
         pay(order);
         return CaffeineBeverageFactory
-                .create(order)
-                .prepareRecipe();
+                .create(order);
     }
 
     private void pay(Order order) {

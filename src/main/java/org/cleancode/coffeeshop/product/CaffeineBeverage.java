@@ -26,6 +26,9 @@ public abstract class CaffeineBeverage {
     public Size getSize() {
         return size;
     }
-    public abstract CaffeineBeverage prepareRecipe();
+    public abstract void prepareRecipe();
     protected abstract void pourInCup();
+    protected abstract void addCondiments();
+    protected abstract void brew();
+    protected abstract void complete();
 }
