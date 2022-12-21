@@ -5,6 +5,8 @@ import org.cleancode.rentcompany.engines.config.EngineType;
 import org.cleancode.rentcompany.engines.config.HorsePower;
 import org.cleancode.rentcompany.engines.config.InjectionType;
 
+import java.util.Objects;
+
 public class Engine {
     private final EngineType engineType;
 
@@ -25,5 +27,18 @@ public class Engine {
 
     public InjectionType getInjectionType() {
         return injectionType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Engine)) return false;
+        Engine engine = (Engine) o;
+        return engineType == engine.engineType && horsePower == engine.horsePower && injectionType == engine.injectionType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(engineType, horsePower, injectionType);
     }
 }
