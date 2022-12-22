@@ -2,7 +2,7 @@ package org.cleancode.rentcompany;
 
 import org.cleancode.rentcompany.cars.Car;
 import org.cleancode.rentcompany.cars.CarFactory;
-import org.cleancode.rentcompany.cars.config.CarConfig;
+import org.cleancode.rentcompany.cars.K5;
 import org.cleancode.rentcompany.engines.EngineFactory;
 import org.cleancode.rentcompany.engines.config.EngineConfig;
 import org.cleancode.rentcompany.engines.config.EngineType;
@@ -15,38 +15,32 @@ import org.cleancode.rentcompany.fueltanks.config.TankType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
 
-    EngineConfig dieselConfig;
-    FuelTankConfig batteryConfig;
-    public CarConfig carConfig;
+    EngineConfig engineConfig;
+    FuelTankConfig fuelTankConfig;
 
     @BeforeEach
     public void setUp() {
-        dieselConfig = new EngineConfig.Builder()
-                .type(EngineType.DIESEL)
-                .horsePower(HorsePower.SMALL)
-                .injectionType(InjectionType.GDI)
-                .build();
-        batteryConfig = new FuelTankConfig.Builder()
+        fuelTankConfig = new FuelTankConfig.Builder()
                 .type(TankType.BATTERY)
                 .size(TankSize.BIG)
                 .build();
-        carConfig = new CarConfig.Builder()
-                .fuelTank(FuelTankFactory.create(batteryConfig))
-                .engine(EngineFactory.create(dieselConfig))
-                .name("Avante")
+        engineConfig = new EngineConfig.Builder()
+                .type(EngineType.DIESEL)
+                .horsePower(HorsePower.SMALL)
+                .injectionType(InjectionType.GDI)
                 .build();
     }
 
     @Test
     public void create(){
-        Car car = CarFactory.create(carConfig);
+        Car car = CarFactory.create(K5.class, fuelTankConfig, engineConfig);
 
-        assertThat(car.getName()).isEqualTo("Avante");
-        assertThat(car.getFuelTank()).isEqualTo(FuelTankFactory.create(batteryConfig));
-        assertThat(car.getEngine()).isEqualTo(EngineFactory.create(dieselConfig));
+        assertThat(car.getName()).isEqualTo("K5");
+        assertThat(car.getFuelTank()).isEqualTo(FuelTankFactory.create(fuelTankConfig));
+        assertThat(car.getEngine()).isEqualTo(EngineFactory.create(engineConfig));
     }
 }
