@@ -18,4 +18,9 @@ public class Sonata extends Car {
                 .build();
         return new Sonata(carConfig);
     }
+
+    @Override
+    public double getDistancePerLiter() {
+        return 15;
+    }
 }

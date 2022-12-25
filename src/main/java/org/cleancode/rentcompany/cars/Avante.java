@@ -19,4 +19,9 @@ public class Avante extends Car {
                 .build();
         return new Avante(carConfig);
     }
+
+    @Override
+    public double getDistancePerLiter() {
+        return 15;
+    }
 }

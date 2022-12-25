@@ -6,7 +6,7 @@ import org.cleancode.rentcompany.fueltanks.FuelTank;
 
 import java.util.Objects;
 
-public abstract class Car {
+public abstract class Car implements Movable {
     protected final Engine engine;
     protected final FuelTank fuelTank;
     protected String name;

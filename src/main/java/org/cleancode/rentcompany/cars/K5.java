@@ -19,4 +19,9 @@ public class K5 extends Car {
                 .build();
         return new K5(carConfig);
     }
+
+    @Override
+    public double getDistancePerLiter() {
+        return 13;
+    }
 }
