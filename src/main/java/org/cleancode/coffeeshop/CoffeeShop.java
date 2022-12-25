@@ -1,6 +1,9 @@
-package org.cleancode.coffeeshop.shop;
+package org.cleancode.coffeeshop;
 
 import org.cleancode.coffeeshop.product.CaffeineBeverage;
+import org.cleancode.coffeeshop.shop.CaffeineBeverageFactory;
+import org.cleancode.coffeeshop.shop.Menu;
+import org.cleancode.coffeeshop.shop.Order;
 
 public class CoffeeShop {
     private final Menu menu;

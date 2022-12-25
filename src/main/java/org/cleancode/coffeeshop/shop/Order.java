@@ -27,7 +27,7 @@ public class Order {
                 '}';
     }
 
-    protected static class OrderBuilder {
+    public static class OrderBuilder {
         private String menuName;
         private int size;
         public OrderBuilder menuName(String menuName) {

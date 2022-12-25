@@ -1,7 +1,6 @@
 package org.cleancode.coffeeshop;
 
 import org.cleancode.coffeeshop.product.*;
-import org.cleancode.coffeeshop.shop.CoffeeShop;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
