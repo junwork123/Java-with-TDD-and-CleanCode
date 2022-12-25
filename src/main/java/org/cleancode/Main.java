@@ -1,6 +1,6 @@
 package org.cleancode;
 
-import org.cleancode.api.SendMailController;
+import org.wellapi.api.SendMailController;
 import org.cleancode.racing.RacingGame;
 
 public class Main {

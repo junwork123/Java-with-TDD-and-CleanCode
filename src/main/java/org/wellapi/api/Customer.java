@@ -1,4 +1,4 @@
-package org.cleancode.api;
+package org.wellapi.api;
 
 public class Customer {
     private final String name;

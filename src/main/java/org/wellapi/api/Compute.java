@@ -1,4 +1,4 @@
-package org.cleancode.api;
+package org.wellapi.api;
 
 import java.util.List;
 import java.util.Map;

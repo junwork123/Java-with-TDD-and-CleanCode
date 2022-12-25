@@ -1,4 +1,4 @@
-package org.cleancode.api;
+package org.wellapi.api;
 
 public class SendMailDto {
     private final String from;
