@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RentTest {
     @Test
-    public void create(){
+    public void createProduct(){
         RentalProducts products = new RentalProducts();
         assertThat(products.getTotalCounts()).isEqualTo(RentalProducts.GARAGE_CAPACITY);
     }

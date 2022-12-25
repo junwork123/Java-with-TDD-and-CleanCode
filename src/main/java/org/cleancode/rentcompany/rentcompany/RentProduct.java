@@ -6,8 +6,12 @@ public class RentProduct {
     public static int COUNT = 0;
     private boolean isAvailable;
     private final int id;
-    private Car car;
-
+    private final Car car;
+    private RentProduct(Car car, boolean isAvailable) {
+        this.id = COUNT++;
+        this.car = car;
+        this.isAvailable = isAvailable;
+    }
     public void setAvailable(boolean available) {
         this.isAvailable = available;
     }
@@ -17,13 +21,15 @@ public class RentProduct {
     public int getId() {
         return id;
     }
-    public Car getCar() {
-        return car;
+    public String getCarName() {
+        return car.getName();
+    }
+    public boolean isSameCar(Class<? extends Car> car) {
+        return car.equals(this.car.getClass());
     }
 
-    private RentProduct(Car car, boolean isAvailable) {
-        this.id = COUNT++;
-        this.isAvailable = isAvailable;
+    public double getFuelEfficiency(double distance) {
+        return distance / car.getDistancePerLiter();
     }
 
     public static class Builder{

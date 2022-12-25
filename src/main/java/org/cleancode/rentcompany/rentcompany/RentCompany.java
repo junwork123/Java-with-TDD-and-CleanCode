@@ -1,16 +1,15 @@
 package org.cleancode.rentcompany.rentcompany;
 
-import org.cleancode.rentcompany.cars.Avante;
-import org.cleancode.rentcompany.cars.CarFactory;
-import org.cleancode.rentcompany.cars.K5;
-import org.cleancode.rentcompany.cars.Sonata;
+import org.cleancode.rentcompany.cars.*;
 
 public class RentCompany {
     private final RentalProducts products;
     protected RentCompany(RentalProducts products) {
         this.products = products;
     }
-
+    public RentProduct getAvailableProduct(Class<? extends Car> car){
+        return products.getAvailableProduct(car);
+    }
     public static RentCompany create(){
         RentalProducts products = new RentalProducts();
         products.add(new RentProduct.Builder()
