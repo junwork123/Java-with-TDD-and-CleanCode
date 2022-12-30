@@ -1,4 +1,4 @@
-package org.cleancode.calculator.calcuable;
+package org.cleancode.calculator.calcuables;
 
 public interface Calculable<T> {
     T add(T item);

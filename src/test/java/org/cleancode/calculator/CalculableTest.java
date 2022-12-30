@@ -1,7 +1,7 @@
 package org.cleancode.calculator;
 
-import org.cleancode.calculator.calcuable.Number;
-import org.cleancode.calculator.calcuable.Point;
+import org.cleancode.calculator.calcuables.Number;
+import org.cleancode.calculator.calcuables.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

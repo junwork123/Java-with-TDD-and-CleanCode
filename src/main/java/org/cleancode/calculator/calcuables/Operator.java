@@ -1,4 +1,4 @@
-package org.cleancode.calculator.calcuable;
+package org.cleancode.calculator.calcuables;
 
 import java.util.Arrays;
 
