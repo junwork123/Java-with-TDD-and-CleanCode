@@ -1,39 +1,27 @@
 package org.cleancode.calculator;
 
-import org.cleancode.calculator.handler.NumberHandler;
-import org.cleancode.calculator.handler.OperatorHandler;
-import org.cleancode.calculator.handler.PointHandler;
-import org.junit.jupiter.api.Test;
+import org.cleancode.calculator.handlers.NumberHandler;
+import org.cleancode.calculator.handlers.OperatorHandler;
+import org.cleancode.calculator.handlers.PointHandler;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HandlerTest {
-    @Test
-    public void supports_Operator(){
-        assertThat(OperatorHandler.isSupports("+")).isEqualTo(true);
-        assertThat(OperatorHandler.isSupports("+-")).isEqualTo(false);
-        assertThat(OperatorHandler.isSupports("+-/*")).isEqualTo(false);
-        assertThat(OperatorHandler.isSupports("qwe")).isEqualTo(false);
-        assertThat(OperatorHandler.isSupports("~")).isEqualTo(false);
+    @ParameterizedTest
+    @CsvSource(value = {"+:true", "+-:false", "+-/*:false", "~:false", "qwe:false"}, delimiter = ':')
+    public void supports_Operator(String input, boolean expected){
+        assertThat(OperatorHandler.canHandle(input)).isEqualTo(expected);
     }
-    @Test
-    public void supports_Number(){
-        assertThat(NumberHandler.isSupports("123")).isEqualTo(true);
-        assertThat(NumberHandler.isSupports("+123")).isEqualTo(true);
-        assertThat(NumberHandler.isSupports("1q2w3e4r")).isEqualTo(false);
-        assertThat(NumberHandler.isSupports("--123")).isEqualTo(false);
-        assertThat(NumberHandler.isSupports("-123+")).isEqualTo(false);
-        assertThat(NumberHandler.isSupports("-")).isEqualTo(false);
-        assertThat(NumberHandler.isSupports("-+")).isEqualTo(false);
+    @ParameterizedTest
+    @CsvSource(value = {"123:true", "+123:true", "--123:false", "-123+:false", "-:false", "-+:false", "1q2w3e4r:false"}, delimiter = ':')
+    public void supports_Number(String input, boolean expected){
+        assertThat(NumberHandler.canHandle(input)).isEqualTo(expected);
     }
-    @Test
-    public void supports_Point(){
-        assertThat(PointHandler.isSupports("(1,2)")).isEqualTo(true);
-        assertThat(PointHandler.isSupports("(+1,-2)")).isEqualTo(true);
-        assertThat(PointHandler.isSupports("1,2")).isEqualTo(false);
-        assertThat(PointHandler.isSupports("-1,+2")).isEqualTo(false);
-        assertThat(PointHandler.isSupports("-123")).isEqualTo(false);
-        assertThat(PointHandler.isSupports("-")).isEqualTo(false);
-        assertThat(PointHandler.isSupports("-+")).isEqualTo(false);
+    @ParameterizedTest
+    @CsvSource(value = {"(1,2):true", "(+1,-2):true", "1,2:false", "-1,+2:false", "-123:false", "-+:false", "1q2w3e4r:false"}, delimiter = ':')
+    public void supports_Point(String input, boolean expected){
+        assertThat(PointHandler.canHandle(input)).isEqualTo(expected);
     }
 }
