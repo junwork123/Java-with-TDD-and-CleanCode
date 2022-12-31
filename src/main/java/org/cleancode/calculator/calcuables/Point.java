@@ -1,10 +1,25 @@
 package org.cleancode.calculator.calcuables;
 
+import org.cleancode.calculator.calcuables.interfaces.Calculable;
+import org.cleancode.calculator.pattern.CalculablePattern;
+import org.cleancode.calculator.pattern.PatternHandler;
+import org.cleancode.calculator.pattern.interfaces.HandleFor;
+
 import java.util.Objects;
 
-public class Point implements Calculable<Point> {
+@HandleFor(calculablePattern = CalculablePattern.POINT)
+public class Point implements Calculable {
     private Number x;
     private Number y;
+    private static Point of(String item) {
+        if(!supports(item)){
+            throw new IllegalArgumentException("Invalid input");
+        }
+        return new Point(new Number(1), new Number(2));
+    }
+    public static boolean supports(String item){
+        return PatternHandler.supports(Point.class, item);
+    }
     public Point(Number x, Number y){
         this.x = x;
         this.y = y;
@@ -16,6 +31,7 @@ public class Point implements Calculable<Point> {
     public Number getY() {
         return this.y;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,33 +43,5 @@ public class Point implements Calculable<Point> {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
-    }
-
-    @Override
-    public Point add(Point item) {
-        this.x.add(item.getX());
-        this.y.add(item.getY());
-        return this;
-    }
-
-    @Override
-    public Point subtract(Point item) {
-        this.x.subtract(item.getX());
-        this.y.subtract(item.getY());
-        return this;
-    }
-
-    @Override
-    public Point multiply(Point item) {
-        this.x.multiply(item.getX());
-        this.y.multiply(item.getY());
-        return this;
-    }
-
-    @Override
-    public Point divide(Point item) {
-        this.x.divide(item.getX());
-        this.y.divide(item.getY());
-        return this;
     }
 }

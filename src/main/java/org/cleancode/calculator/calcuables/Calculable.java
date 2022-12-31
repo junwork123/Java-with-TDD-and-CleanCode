@@ -1,8 +1,0 @@
-package org.cleancode.calculator.calcuables;
-
-public interface Calculable<T> {
-    T add(T item);
-    T subtract(T item);
-    T multiply(T item);
-    T divide(T item);
-}
