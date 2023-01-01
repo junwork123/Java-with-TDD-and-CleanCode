@@ -9,6 +9,6 @@ public class PatternHandler {
         return getPattern(aClass).matcher(item).matches();
     }
     public static Pattern getPattern(Class<?> aClass){
-        return aClass.getAnnotation(HandleFor.class).calculablePattern().getPattern();
+        return aClass.getAnnotation(HandleFor.class).target().getPattern();
     }
 }

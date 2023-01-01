@@ -7,10 +7,10 @@ import org.cleancode.calculator.pattern.interfaces.HandleFor;
 
 import java.util.Objects;
 
-@HandleFor(calculablePattern = CalculablePattern.POINT)
+@HandleFor(target = CalculablePattern.POINT)
 public class Point implements Calculable {
-    private Number x;
-    private Number y;
+    private final Number x;
+    private final Number y;
     private static Point of(String item) {
         if(!supports(item)){
             throw new IllegalArgumentException("Invalid input");

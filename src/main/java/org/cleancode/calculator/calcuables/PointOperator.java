@@ -7,7 +7,7 @@ import org.cleancode.calculator.pattern.interfaces.HandleFor;
 
 import java.util.Arrays;
 
-@HandleFor(calculablePattern = CalculablePattern.OPERATION)
+@HandleFor(target = CalculablePattern.POINT)
 public enum PointOperator implements Operable<Point> {
     ADD("+") {
         @Override

@@ -6,7 +6,7 @@ import org.cleancode.calculator.pattern.PatternHandler;
 import org.cleancode.calculator.pattern.interfaces.HandleFor;
 
 import java.util.Arrays;
-@HandleFor(calculablePattern = CalculablePattern.OPERATION)
+@HandleFor(target = CalculablePattern.NUMBER)
 public enum NumberOperator implements Operable<Number> {
     ADD("+") {
         @Override

@@ -7,9 +7,9 @@ import org.cleancode.calculator.pattern.interfaces.HandleFor;
 
 import java.util.Objects;
 
-@HandleFor(calculablePattern = CalculablePattern.NUMBER)
+@HandleFor(target = CalculablePattern.NUMBER)
 public class Number implements Calculable {
-    private int value;
+    private final int value;
     private static Number of(String item) {
         if(!supports(item)){
             throw new IllegalArgumentException("Invalid input");
@@ -32,7 +32,6 @@ public class Number implements Calculable {
         Number number1 = (Number) o;
         return value == number1.value;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(value);
