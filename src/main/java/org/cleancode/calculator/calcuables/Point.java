@@ -2,8 +2,7 @@ package org.cleancode.calculator.calcuables;
 
 import org.cleancode.calculator.calcuables.interfaces.Calculable;
 import org.cleancode.calculator.pattern.CalculablePattern;
-import org.cleancode.calculator.pattern.PatternHandler;
-import org.cleancode.calculator.pattern.interfaces.HandleFor;
+import org.cleancode.calculator.calcuables.interfaces.HandleFor;
 
 import java.util.Objects;
 
@@ -11,15 +10,6 @@ import java.util.Objects;
 public class Point implements Calculable {
     private final Number x;
     private final Number y;
-    private static Point of(String item) {
-        if(!supports(item)){
-            throw new IllegalArgumentException("Invalid input");
-        }
-        return new Point(new Number(1), new Number(2));
-    }
-    public static boolean supports(String item){
-        return PatternHandler.supports(Point.class, item);
-    }
     public Point(Number x, Number y){
         this.x = x;
         this.y = y;
