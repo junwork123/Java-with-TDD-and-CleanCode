@@ -2,56 +2,47 @@ package org.cleancode.calculator.calcuables;
 
 import org.cleancode.calculator.calcuables.interfaces.Operable;
 import org.cleancode.calculator.pattern.CalculablePattern;
-import org.cleancode.calculator.pattern.PatternHandler;
-import org.cleancode.calculator.pattern.interfaces.HandleFor;
+import org.cleancode.calculator.calcuables.interfaces.HandleAs;
+import org.cleancode.calculator.calcuables.interfaces.HandleFor;
+import org.cleancode.calculator.pattern.OperablePattern;
 
-import java.util.Arrays;
 @HandleFor(target = CalculablePattern.NUMBER)
 public enum NumberOperator implements Operable<Number> {
-    ADD("+") {
+    @HandleAs(symbol = OperablePattern.ADD)
+    ADD {
         @Override
         public Number apply(Number a, Number b) {
             return new Number(a.getValue() + b.getValue());
         }
     },
-    SUBTRACT("-") {
+    @HandleAs(symbol = OperablePattern.SUBTRACT)
+    SUBTRACT {
         @Override
         public Number apply(Number a, Number b) {
             return new Number(a.getValue() - b.getValue());
         }
     },
-    MULTIPLY("*") {
+    @HandleAs(symbol = OperablePattern.MULTIPLY)
+    MULTIPLY{
         @Override
         public Number apply(Number a, Number b) {
             return new Number(a.getValue() * b.getValue());
         }
     },
-    DIVIDE("/") {
+    @HandleAs(symbol = OperablePattern.DIVIDE)
+    DIVIDE {
         @Override
         public Number apply(Number a, Number b) {
             return new Number(a.getValue() / b.getValue());
         }
     };
-    private final String symbol;
 
-    NumberOperator(String symbol) {
-        this.symbol = symbol;
-    }
     @Override
-    public String getSymbol() {
-        return this.symbol;
-    }
-
-    private static NumberOperator of(String item) {
-        if(!supports(item)){
-            throw new IllegalArgumentException("Invalid input");
+    public OperablePattern getSymbol() {
+        try {
+            return this.getDeclaringClass().getField(name()).getAnnotation(HandleAs.class).symbol();
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
         }
-        return Arrays.stream(NumberOperator.values())
-                .filter(numberOperator -> numberOperator.getSymbol().equals(item))
-                .findFirst()
-                .orElseThrow();
-    }
-    public static boolean supports(String item){
-        return PatternHandler.supports(NumberOperator.class, item);
     }
 }

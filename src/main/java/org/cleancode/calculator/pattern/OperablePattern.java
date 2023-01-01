@@ -4,13 +4,15 @@ import org.cleancode.calculator.pattern.interfaces.RegexPattern;
 
 import java.util.regex.Pattern;
 
-public enum CalculablePattern implements RegexPattern {
-    NONE(""),
-    NUMBER("^[-+]?[0-9]+$"),
-    POINT("^\\([-+]?\\d+,[-+]?\\d+\\)$");
+public enum OperablePattern implements RegexPattern {
+    ADD("^+$"),
+    SUBTRACT("^-$"),
+    MULTIPLY("^*$"),
+    DIVIDE("^/$"),
+    DISTANCE("^<->$");
     private final Pattern regex;
 
-    CalculablePattern(String regex) {
+    OperablePattern(String regex) {
         this.regex = Pattern.compile(regex);
     }
     @Override

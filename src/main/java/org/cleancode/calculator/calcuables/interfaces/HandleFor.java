@@ -1,4 +1,4 @@
-package org.cleancode.calculator.pattern.interfaces;
+package org.cleancode.calculator.calcuables.interfaces;
 
 import org.cleancode.calculator.pattern.CalculablePattern;
 
