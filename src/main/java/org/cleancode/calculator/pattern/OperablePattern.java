@@ -5,11 +5,11 @@ import org.cleancode.calculator.pattern.interfaces.RegexPattern;
 import java.util.regex.Pattern;
 
 public enum OperablePattern implements RegexPattern {
-    ADD("^+$"),
-    SUBTRACT("^-$"),
-    MULTIPLY("^*$"),
-    DIVIDE("^/$"),
-    DISTANCE("^<->$");
+    ADD("^[+]$"),
+    SUBTRACT("^[-]$"),
+    MULTIPLY("^[*]$"),
+    DIVIDE("^[/]$"),
+    DISTANCE("^(<->)$");
     private final Pattern regex;
 
     OperablePattern(String regex) {

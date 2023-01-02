@@ -1,9 +1,9 @@
 package org.cleancode.calculator.calcuables;
 
-import org.cleancode.calculator.calcuables.interfaces.Operable;
-import org.cleancode.calculator.pattern.CalculablePattern;
 import org.cleancode.calculator.calcuables.interfaces.HandleAs;
 import org.cleancode.calculator.calcuables.interfaces.HandleFor;
+import org.cleancode.calculator.calcuables.interfaces.Operable;
+import org.cleancode.calculator.pattern.CalculablePattern;
 import org.cleancode.calculator.pattern.OperablePattern;
 
 @HandleFor(target = CalculablePattern.POINT)
@@ -44,9 +44,21 @@ public enum PointOperator implements Operable<Point> {
         }
     };
     @Override
+    public CalculablePattern getTarget() {
+        return this.getDeclaringClass().getAnnotation(HandleFor.class).target();
+    }
+    @Override
     public OperablePattern getSymbol() {
         try {
             return this.getDeclaringClass().getField(name()).getAnnotation(HandleAs.class).symbol();
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Override
+    public int getHowMany() {
+        try {
+            return this.getDeclaringClass().getField(name()).getAnnotation(HandleAs.class).howMany();
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
