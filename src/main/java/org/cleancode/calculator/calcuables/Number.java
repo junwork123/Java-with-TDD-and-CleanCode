@@ -9,6 +9,9 @@ import java.util.Objects;
 @HandleFor(target = CalculablePattern.NUMBER)
 public class Number implements Calculable {
     private final int value;
+    public static Number of(String item){
+        return new Number(Integer.parseInt(item));
+    }
     public Number(int value){
         this.value = value;
     }
@@ -25,5 +28,10 @@ public class Number implements Calculable {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

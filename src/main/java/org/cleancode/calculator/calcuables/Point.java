@@ -10,6 +10,10 @@ import java.util.Objects;
 public class Point implements Calculable {
     private final Number x;
     private final Number y;
+    public static Point of(String item){
+        String[] split = item.replaceAll("[()]", "").split(",");
+        return new Point(Number.of(split[0]), Number.of(split[1]));
+    }
     public Point(Number x, Number y){
         this.x = x;
         this.y = y;
@@ -33,5 +37,10 @@ public class Point implements Calculable {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
     }
 }
