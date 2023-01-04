@@ -6,42 +6,46 @@ import org.cleancode.calculator.calcuables.interfaces.HandleAs;
 import org.cleancode.calculator.calcuables.interfaces.HandleFor;
 import org.cleancode.calculator.pattern.OperablePattern;
 
-import java.util.regex.Pattern;
+import java.util.List;
 
 @HandleFor(target = CalculablePattern.NUMBER)
-public enum NumberOperator implements Operable<Number> {
+public enum NumberOperator implements Operable {
     @HandleAs(symbol = OperablePattern.ADD)
     ADD {
         @Override
-        public Number apply(Number a, Number b) {
-            return new Number(a.getValue() + b.getValue());
+        public String apply(List<String> items) {
+            Number a = Number.of(items.get(0));
+            Number b = Number.of(items.get(1));
+            return new Number(a.getValue() + b.getValue()).toString();
         }
     },
     @HandleAs(symbol = OperablePattern.SUBTRACT)
     SUBTRACT {
         @Override
-        public Number apply(Number a, Number b) {
-            return new Number(a.getValue() - b.getValue());
+        public String apply(List<String> items) {
+            Number a = Number.of(items.get(0));
+            Number b = Number.of(items.get(1));
+            return new Number(a.getValue() - b.getValue()).toString();
         }
     },
     @HandleAs(symbol = OperablePattern.MULTIPLY)
     MULTIPLY{
         @Override
-        public Number apply(Number a, Number b) {
-            return new Number(a.getValue() * b.getValue());
+        public String apply(List<String> items) {
+            Number a = Number.of(items.get(0));
+            Number b = Number.of(items.get(1));
+            return new Number(a.getValue() * b.getValue()).toString();
         }
     },
     @HandleAs(symbol = OperablePattern.DIVIDE)
     DIVIDE {
         @Override
-        public Number apply(Number a, Number b) {
-            if(b.equals(new Number(0))){
-                throw new ArithmeticException("0으로 나눌 수 없습니다.");
-            }
-            return new Number(a.getValue() / b.getValue());
+        public String apply(List<String> items) {
+            Number a = Number.of(items.get(0));
+            Number b = Number.of(items.get(1));
+            return new Number(a.getValue() / b.getValue()).toString();
         }
     };
-
     @Override
     public CalculablePattern getTarget() {
         return this.getDeclaringClass().getAnnotation(HandleFor.class).target();

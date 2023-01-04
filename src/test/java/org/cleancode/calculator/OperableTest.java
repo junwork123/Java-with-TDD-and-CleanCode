@@ -9,38 +9,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OperableTest {
     private final int x = 3;
     private final int y = 7;
+    List<String> itemsOfNumber = List.of("3", "7");
+    List<String> itemsOfPoint = List.of("(3,7)", "(7,3)");
     @Test
     public void operate_Number()  {
-        assertThat(NumberOperator.ADD.apply(new Number(x), new Number(y))).isEqualTo(new Number(x+y));
-        assertThat(NumberOperator.SUBTRACT.apply(new Number(x), new Number(y))).isEqualTo(new Number(x-y));
-        assertThat(NumberOperator.MULTIPLY.apply(new Number(x), new Number(y))).isEqualTo(new Number(x*y));
-        assertThat(NumberOperator.DIVIDE.apply(new Number(x), new Number(y))).isEqualTo(new Number(x/y));
+        assertThat(NumberOperator.ADD.apply(itemsOfNumber)).isEqualTo(new Number(x+y).toString());
+        assertThat(NumberOperator.SUBTRACT.apply(itemsOfNumber)).isEqualTo(new Number(x-y).toString());
+        assertThat(NumberOperator.MULTIPLY.apply(itemsOfNumber)).isEqualTo(new Number(x*y).toString());
+        assertThat(NumberOperator.DIVIDE.apply(itemsOfNumber)).isEqualTo(new Number(x/y).toString());
     }
     @Test
     public void operate_Point()  {
-        Point p1 = new Point(new Number(x), new Number(y));
-        Point p2 = new Point(new Number(y), new Number(x));
-
-        Point result = PointOperator.ADD.apply(p1, p2);
-        assertThat(result.getX()).isEqualTo(new Number(x+y));
-        assertThat(result.getY()).isEqualTo(new Number(y+x));
-
-        result = PointOperator.SUBTRACT.apply(p1, p2);
-        assertThat(result.getX()).isEqualTo(new Number(x-y));
-        assertThat(result.getY()).isEqualTo(new Number(y-x));
-
-        result = PointOperator.MULTIPLY.apply(p1, p2);
-        assertThat(result.getX()).isEqualTo(new Number(x*y));
-        assertThat(result.getY()).isEqualTo(new Number(y*x));
-
-        result = PointOperator.DIVIDE.apply(p1, p2);
-        assertThat(result.getX()).isEqualTo(new Number(x/y));
-        assertThat(result.getY()).isEqualTo(new Number(y/x));
+        assertThat(PointOperator.ADD.apply(itemsOfPoint)).isEqualTo(new Point(new Number(x+y), new Number(y+x)).toString());
+        assertThat(PointOperator.SUBTRACT.apply(itemsOfPoint)).isEqualTo(new Point(new Number(x-y), new Number(y-x)).toString());
     }
     @ParameterizedTest
     @CsvSource(value = {"1+2:true", "+1 + 2:true", "+1++2:true"}, delimiter = ':')

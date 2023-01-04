@@ -6,41 +6,39 @@ import org.cleancode.calculator.calcuables.interfaces.Operable;
 import org.cleancode.calculator.pattern.CalculablePattern;
 import org.cleancode.calculator.pattern.OperablePattern;
 
+import java.util.List;
+
 @HandleFor(target = CalculablePattern.POINT)
-public enum PointOperator implements Operable<Point> {
+public enum PointOperator implements Operable {
     @HandleAs(symbol = OperablePattern.ADD)
     ADD {
         @Override
-        public Point apply(Point a, Point b) {
-            return new Point(NumberOperator.ADD.apply(a.getX(), b.getX()), NumberOperator.ADD.apply(a.getY(), b.getY()));
+        public String apply(List<String> items) {
+            Point a = Point.of(items.get(0));
+            Point b = Point.of(items.get(1));
+            return new Point(new Number(a.getX().getValue() + b.getX().getValue())
+                    , new Number(a.getY().getValue() + b.getY().getValue())).toString();
         }
     },
     @HandleAs(symbol = OperablePattern.SUBTRACT)
     SUBTRACT {
         @Override
-        public Point apply(Point a, Point b) {
-            return new Point(NumberOperator.SUBTRACT.apply(a.getX(), b.getX()), NumberOperator.SUBTRACT.apply(a.getY(), b.getY()));
-        }
-    },
-    @HandleAs(symbol = OperablePattern.MULTIPLY)
-    MULTIPLY {
-        @Override
-        public Point apply(Point a, Point b) {
-            return new Point(NumberOperator.MULTIPLY.apply(a.getX(), b.getX()), NumberOperator.MULTIPLY.apply(a.getY(), b.getY()));
-        }
-    },
-    @HandleAs(symbol = OperablePattern.DIVIDE)
-    DIVIDE {
-        @Override
-        public Point apply(Point a, Point b) {
-            return new Point(NumberOperator.DIVIDE.apply(a.getX(), b.getX()), NumberOperator.DIVIDE.apply(a.getY(), b.getY()));
+        public String apply(List<String> items) {
+            Point a = Point.of(items.get(0));
+            Point b = Point.of(items.get(1));
+            return new Point(new Number(a.getX().getValue() - b.getX().getValue())
+                    , new Number(a.getY().getValue() - b.getY().getValue())).toString();
         }
     },
     @HandleAs(symbol = OperablePattern.DISTANCE)
     DISTANCE {
         @Override
-        public Point apply(Point a, Point b) {
-            return new Point(NumberOperator.SUBTRACT.apply(a.getX(), b.getX()), NumberOperator.SUBTRACT.apply(a.getY(), b.getY()));
+        public String apply(List<String> items) {
+            Point a = Point.of(items.get(0));
+            Point b = Point.of(items.get(1));
+            double result = Math.sqrt(Math.pow(a.getX().getValue() - b.getX().getValue(), 2)
+                                        + Math.pow(a.getY().getValue() - b.getY().getValue(), 2));
+            return new Number((int) result).toString();
         }
     };
     @Override
