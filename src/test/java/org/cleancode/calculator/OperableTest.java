@@ -14,8 +14,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OperableTest {
-    private final int x = 3;
-    private final int y = 7;
+    private final double x = 3;
+    private final double y = 7;
     List<String> itemsOfNumber = List.of("3", "7");
     List<String> itemsOfPoint = List.of("(3,7)", "(7,3)");
     @Test

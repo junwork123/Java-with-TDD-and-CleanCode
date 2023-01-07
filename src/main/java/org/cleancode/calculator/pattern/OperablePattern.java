@@ -9,7 +9,7 @@ public enum OperablePattern implements RegexPattern {
     SUBTRACT("[-]"),
     MULTIPLY("[*]"),
     DIVIDE("[/]"),
-    DISTANCE("(<->)");
+    DISTANCE("<->");
     private final Pattern regex;
 
     OperablePattern(String regex) {

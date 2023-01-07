@@ -8,14 +8,14 @@ import java.util.Objects;
 
 @HandleFor(target = CalculablePattern.NUMBER)
 public class Number implements Calculable {
-    private final int value;
+    private final double value;
     public static Number of(String item){
-        return new Number(Integer.parseInt(item));
+        return new Number(Double.parseDouble(item));
     }
-    public Number(int value){
+    public Number(double value){
         this.value = value;
     }
-    public int getValue() {
+    public double getValue() {
         return value;
     }
     @Override

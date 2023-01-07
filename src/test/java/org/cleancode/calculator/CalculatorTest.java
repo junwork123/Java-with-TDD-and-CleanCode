@@ -8,14 +8,15 @@ public class CalculatorTest {
 
     @Test
     public void calculate_Number(){
-        assertThat(calculator.calculate("1+2")).isEqualTo("3");
-        assertThat(calculator.calculate("1-2")).isEqualTo("-1");
-        assertThat(calculator.calculate("1*2")).isEqualTo("2");
-        assertThat(calculator.calculate("1/2")).isEqualTo("0");
+        assertThat(calculator.calculate("1+2")).isEqualTo("3.0");
+        assertThat(calculator.calculate("1-2")).isEqualTo("-1.0");
+        assertThat(calculator.calculate("1*2")).isEqualTo("2.0");
+        assertThat(calculator.calculate("1/2")).isEqualTo("0.0");
     }
     @Test
     public void calculate_Point(){
-        assertThat(calculator.calculate("(1,2)+(3,4)")).isEqualTo("(4,6)");
-        assertThat(calculator.calculate("(1,2)-(3,4)")).isEqualTo("(-2,-2)");
+        assertThat(calculator.calculate("(1,2)+(3,4)")).isEqualTo("(4.0,6.0)");
+        assertThat(calculator.calculate("(1,2)-(3,4)")).isEqualTo("(-2.0,-2.0)");
+        assertThat(calculator.calculate("(1,2)<->(3,4)")).isEqualTo("2.0"); // distance
     }
 }
