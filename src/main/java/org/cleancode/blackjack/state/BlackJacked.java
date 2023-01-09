@@ -4,9 +4,10 @@ import org.cleancode.blackjack.cards.Hands;
 
 public class BlackJacked extends PlayerState {
     public BlackJacked(final Hands hands) {
-        super(hands, earningRate());
+        super(hands);
     }
-    public static double earningRate() {
-        return 1.5;
+    @Override
+    public double earningRate() {
+        return DEFAULT_EARNING_RATE * 1.5;
     }
 }

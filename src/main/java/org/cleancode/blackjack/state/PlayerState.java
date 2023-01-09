@@ -7,13 +7,8 @@ public abstract class PlayerState implements Playable {
     public static final int MAX_RANK = 21;
     public static final double DEFAULT_EARNING_RATE = 1.0;
     protected final Hands hands;
-    protected final double earningRate;
     protected PlayerState(Hands hands) {
-        this(hands, DEFAULT_EARNING_RATE);
-    }
-    protected PlayerState(final Hands hands, final double earningRate) {
         this.hands = hands;
-        this.earningRate = earningRate;
     }
 
     @Override
@@ -40,4 +35,6 @@ public abstract class PlayerState implements Playable {
     }
 
     public int getScore(){ return hands.getSum(); }
+
+    public abstract double earningRate();
 }

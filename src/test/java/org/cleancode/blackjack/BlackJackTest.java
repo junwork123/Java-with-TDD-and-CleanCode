@@ -35,14 +35,20 @@ public class BlackJackTest {
     public void started(){
         Started started = new Started(normalHands);
         assertThat(started.getScore()).isEqualTo(normalHands.getSum());
-
-        Started started2 = new Started(blackjackedHands);
-        assertThat(started2.getScore()).isEqualTo(blackjackedHands.getSum());
     }
     @Test
     public void busted(){
         Started started = new Started(normalHands);
-        PlayerState draw = started.draw(deck);
-        assertThat(draw.getScore()).isEqualTo(28);
+        PlayerState busted = started.draw(deck);
+        assertThat(busted.getScore()).isEqualTo(28);
+        assertThat(busted.isBusted()).isTrue();
+        assertThat(busted.earningRate()).isEqualTo(-1);
+    }
+    @Test
+    public void blackjacked(){
+        Started started = new Started(blackjackedHands);
+        assertThat(started.getScore()).isEqualTo(21);
+        assertThat(started.isBlackjacked()).isTrue();
+        assertThat(started.earningRate()).isEqualTo(1.5);
     }
 }

@@ -4,9 +4,10 @@ import org.cleancode.blackjack.cards.Hands;
 
 public class Busted extends PlayerState {
     public Busted(final Hands hands) {
-        super(hands, earningRate());
+        super(hands);
     }
-    public static double earningRate() {
-        return -1;
+    @Override
+    public double earningRate() {
+        return -DEFAULT_EARNING_RATE;
     }
 }
