@@ -5,13 +5,20 @@ import java.util.List;
 
 public class CardDeck {
     List<Card> cards;
-    public CardDeck() {
-        this.cards = new ArrayList<>();
+    public static CardDeck create() {
+        return new CardDeck(DefaultCardSet());
+    }
+    private static List<Card> DefaultCardSet() {
+        List<Card> cards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                this.cards.add(new Card(rank, suit));
+                cards.add(new Card(suit, rank));
             }
         }
+        return cards;
+    }
+    public CardDeck(List<Card> cards) {
+        this.cards = cards;
         shuffle();
     }
     private void shuffle() {
@@ -25,12 +32,9 @@ public class CardDeck {
         return cards;
     }
     public Card draw() {
-        if (!this.hasCards()) {
+        if (cards.isEmpty()) {
             throw new IllegalStateException("No more cards");
         }
         return cards.remove(0);
-    }
-    public boolean hasCards() {
-        return cards.isEmpty();
     }
 }
